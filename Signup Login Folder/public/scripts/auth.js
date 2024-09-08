@@ -13,7 +13,6 @@ async function signup(e){
         displayName: "User"
       })
       createUserCollection(result.user)
-      // await result.user.sendEmailVerification()
       M.toast({html:`welcome ${result.user.email}`,classes:"green"})
      console.log(result)  
     }catch(err){
@@ -53,7 +52,6 @@ function logout(){
 const unsubscribe  = firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       console.log(user)
-      // getuserInfo(user.uid)
       document.getElementById("loginli").style.display = "none"
       document.getElementById("signupli").style.display = "none"
       document.getElementById("logoutli").style.display = "block"
@@ -70,14 +68,9 @@ const unsubscribe  = firebase.auth().onAuthStateChanged((user) => {
       document.getElementById("logoutli").style.display = "none"
       document.getElementById("loginli").style.display = "block"
       document.getElementById("signupli").style.display = "block"
-      // M.toast({html: "signout success",classes:"green"})
     }
   });
 
-/*
-code cleanup
-unsubscribe()
-*/  
 
 
 async function loginWithGoogle(){
