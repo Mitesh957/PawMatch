@@ -4,62 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Available Pets | PawMatch</title>
-    
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
-       
-        .bg-primary {
-            background-color: #ffedeb; 
-        }
-        .bg-accent {
-            background-color: #ffcccb; 
-        }
-        .text-primary {
-            color: #3b3b3b; 
-        }
-        .text-secondary {
-            color: #555555; 
-        }
-        .button-primary {
-            background-color: #ff6f61; 
-            color: white;
-        }
-        .button-primary:hover {
-            background-color: #ff5a50; 
-        }
+        .bg-primary { background-color: #ffedeb; }
+        .bg-accent { background-color: #ffcccb; }
+        .text-primary { color: #3b3b3b; }
+        .text-secondary { color: #555555; }
+        .button-primary { background-color: #ff6f61; color: white; }
+        .button-primary:hover { background-color: #ff5a50; }
     </style>
 </head>
 <body class="bg-primary">
     <nav class="bg-white bg-opacity-80 p-2 fixed w-full top-0 z-50 shadow-md">
         <div class="container mx-auto flex justify-between items-center">
-          <div class="flex items-center">
-            <a href="#" class="logo"><img src="icons8-pets-96.png" alt=""></a><h1>PawMatch</h1>
-          </div>
-          <div class="hidden md:flex space-x-4">
-            <a href="index1.html" class="text-secondary hover:text-button-primary">Home</a>
-            <a href="add-pet.html" class="text-secondary hover:text-button-primary">Add Pet</a>
-            <a href="adoption-form.html" class="text-secondary hover:text-button-primary">Adoption Process</a>
-          </div>
-          <div class="flex items-center">
+            <h1 class="text-2xl font-bold text-primary"><a href="index1.html">PawMatch</a></h1>
+            <div class="hidden md:flex space-x-4">
+                <a href="index1.html" class="text-secondary hover:text-button-primary">Home</a>
+                <a href="add-pet.html" class="text-secondary hover:text-button-primary">Add Pet</a>
+                <a href="adoption-form.html" class="text-secondary hover:text-button-primary">Adoption Process</a>
+            </div>
             <button class="button-primary px-4 py-2 rounded-md"><a href="main.html">Sign Out</a></button>
-          </div>
         </div>
     </nav>
     <div class="bg-accent p-6 rounded-lg shadow-md mt-20">
         <div class="container mx-auto p-4">
-           
             <div class="mb-4 flex">
                 <input type="text" id="searchInput" class="w-full p-2 border rounded" placeholder="Search by breed, type, or description...">
                 <button onclick="searchPet()" class="button-primary p-2 rounded mx-2">Search</button>
             </div>
-
-           
             <div id="petCards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                
             </div>
         </div>
-
-        
         <div id="petCardTemplate" class="hidden">
             <div class="bg-white rounded-lg shadow-md overflow-hidden">
                 <a class="pet-link" href="#"><img class="w-full h-48 object-cover" src="pet_photo.jpg" alt="Pet image"></a>
@@ -73,45 +48,42 @@
         </div>
     </div>
     <script>
-        
         const pets = JSON.parse(localStorage.getItem('pets')) || [];
-
         function searchPet() {
             const searchInput = document.getElementById('searchInput').value.toLowerCase();
             const petCardsContainer = document.getElementById('petCards');
             petCardsContainer.innerHTML = '';
-
             pets.forEach(pet => {
-                if (pet.breed.toLowerCase().includes(searchInput) || 
-                    pet.name.toLowerCase().includes(searchInput) || 
+                if (pet.name.toLowerCase().includes(searchInput) || 
+                    pet.breed.toLowerCase().includes(searchInput) ||
                     pet.description.toLowerCase().includes(searchInput)) {
-
-                    const petCardTemplate = document.getElementById('petCardTemplate');
-                    const petCardClone = petCardTemplate.cloneNode(true);
-                    petCardClone.classList.remove('hidden');
-
-                    petCardClone.querySelector('img').src = pet.photo;
-                    petCardClone.querySelector('h2').textContent = pet.name;
-                    petCardClone.querySelector('p:nth-child(2)').textContent = Breed:${pet.breed};
-                    petCardClone.querySelector('p:nth-child(3)').textContent = Age:${pet.age};
-                    petCardClone.querySelector('p:nth-child(4)').textContent = Description:${pet.description};
-
-                    const petLink = petCardClone.querySelector('.pet-link');
-                    petLink.href = pet-detail.html?id=${pet.id};
-
-                    
-                    petCardsContainer.appendChild(petCardClone);
+                    const petCardTemplate = document.getElementById('petCardTemplate').cloneNode(true);
+                    petCardTemplate.classList.remove('hidden');
+                    petCardTemplate.querySelector('.pet-link').href = 'adoption-form.html?id=' + pet.id;
+                    petCardTemplate.querySelector('img').src = pet.photo;
+                    petCardTemplate.querySelector('h2').textContent = pet.name;
+                    petCardTemplate.querySelector('p:nth-of-type(1)').textContent = 'Breed: ' + pet.breed;
+                    petCardTemplate.querySelector('p:nth-of-type(2)').textContent = 'Age: ' + pet.age;
+                    petCardTemplate.querySelector('p:nth-of-type(3)').textContent = 'Description: ' + pet.description;
+                    petCardsContainer.appendChild(petCardTemplate);
                 }
             });
         }
-
-        document.getElementById('searchInput').addEventListener('keydown', function(event) {
-            if (event.key === 'Enter') {
-                searchPet();
-            }
-        });
-
-        searchPet();
+        function displayPets() {
+            const petCardsContainer = document.getElementById('petCards');
+            pets.forEach(pet => {
+                const petCardTemplate = document.getElementById('petCardTemplate').cloneNode(true);
+                petCardTemplate.classList.remove('hidden');
+                petCardTemplate.querySelector('.pet-link').href = 'adoption-form.html?id=' + pet.id;
+                petCardTemplate.querySelector('img').src = pet.photo;
+                petCardTemplate.querySelector('h2').textContent = pet.name;
+                petCardTemplate.querySelector('p:nth-of-type(1)').textContent = 'Breed: ' + pet.breed;
+                petCardTemplate.querySelector('p:nth-of-type(2)').textContent = 'Age: ' + pet.age;
+                petCardTemplate.querySelector('p:nth-of-type(3)').textContent = 'Description: ' + pet.description;
+                petCardsContainer.appendChild(petCardTemplate);
+            });
+        }
+        displayPets();
     </script>
 </body>
 </html>
