@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adopt a Pet</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffedeb; 
+            color: #3b3b3b; 
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #ffe4c4; 
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #ff6f61; 
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555555; 
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        textarea {
+            resize: vertical;
+        }
+        .button-primary {
+            width: 100%;
+            padding: 15px;
+            background-color: #ff6f61; 
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .button-primary:hover {
+            background-color: #ff5a50; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Adopt a Pet</h1>
+        <form>
+            <div class="form-group">
+                <label for="name">Your Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="address">Home Address:</label>
+                <textarea id="address" name="address" rows="4" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="pet">Pet Interested In:</label>
+                <select id="pet" name="pet" required>
+                    <option value="Dog">Dog</option>
+                    <option value="Cat">Cat</option>
+                    <option value="Bird">Bird</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="exp">Previous Pet Experience</label>
+                <textarea id="reason" name="reason" rows="4" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="reason">Why Do You Want to Adopt?</label>
+                <textarea id="reason" name="reason" rows="4" required></textarea>
+            </div>
+            <button onclick="window.location.href='menu.html'" type="button" class="button-primary">
+                Submit Adoption Form
+            </button>
+                </form>
+    </div>
+</body>
+</html>
